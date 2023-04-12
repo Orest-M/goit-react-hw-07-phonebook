@@ -15,15 +15,14 @@ const Contacts = ({ setFilteredArr }) => {
   const deleteItem = e => {
     if (e.target.dataset.id) {
       dispatch(deleteContact(e.target.dataset.id));
-      window.location.reload();
     }
   };
 
   return (
     <div>
       <ul onClick={deleteItem} className={css.contacts}>
-        {data.map(({ name, number, id }) => (
-          <ContactsItem key={id} name={name} number={number} id={id} />
+        {data.map(({ name, phone, id }) => (
+          <ContactsItem key={id} name={name} number={phone} id={id} />
         ))}
       </ul>
     </div>
