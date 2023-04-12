@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectItems, selectFilter } from 'redux/selectors';
+import {
+  selectItems,
+  selectFilter,
+  selectError,
+  selectIsLoading,
+} from 'redux/selectors';
 import { fetchContacts } from 'redux/operations';
 
 import AddContacts from './addContact/AddContact';
@@ -10,6 +15,8 @@ import Filter from './filter/Filter';
 export const App = () => {
   const filter = useSelector(selectFilter);
   const contacts = useSelector(selectItems);
+  const error = useSelector(selectError);
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +32,14 @@ export const App = () => {
       return newArr;
     }
   };
+
+  if (isLoading) {
+    return <h3>Loading...</h3>;
+  }
+
+  if (error) {
+    return <h3>error</h3>;
+  }
 
   return (
     <div style={{ marginLeft: '20px' }}>
